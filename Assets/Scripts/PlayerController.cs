@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject bullet;
+    public GameObject shooter;
+
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -25,32 +26,21 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        Vector3 move = MovementLogic.Move(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")), playerSpeed);
+        controller.Move(move * Time.deltaTime);
 
         if (move != Vector3.zero)
         {
             gameObject.transform.forward = move;
         }
 
-        // Changes the height position of the player..
-        if (Input.GetButtonDown("Jump") && groundedPlayer)
-        {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        }
-
+        playerVelocity.y += MovementLogic.Jump(Input.GetButtonDown("Jump") && groundedPlayer, jumpHeight, gravityValue);
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
-    }
 
-    // refactor to the below functions
-    private Vector3 Move(Vector3 direction, float speed)
-    {
-
-    }
-
-    private Vector3 Jump(bool isJumping, float maxHeight, float gravity)
-    {
-
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(bullet, shooter.transform.position, shooter.transform.rotation);
+        }
     }
 }
