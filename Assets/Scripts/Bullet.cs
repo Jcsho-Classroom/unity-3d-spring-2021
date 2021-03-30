@@ -19,4 +19,9 @@ public class Bullet : MonoBehaviour
     {
         rb.MovePosition(rb.position + transform.forward * Time.deltaTime);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        gameObject.SetActive(false);
+    }
 }

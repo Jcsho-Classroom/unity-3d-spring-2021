@@ -40,7 +40,13 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(bullet, shooter.transform.position, shooter.transform.rotation);
+            GameObject bullet = ObjectPool.SharedInstance.GetPooledObject();
+            if (bullet != null)
+            {
+                bullet.transform.position = shooter.transform.position;
+                bullet.transform.rotation = shooter.transform.rotation;
+                bullet.SetActive(true);
+            }
         }
     }
 }
