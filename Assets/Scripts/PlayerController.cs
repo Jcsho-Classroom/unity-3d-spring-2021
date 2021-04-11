@@ -4,6 +4,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject bullet;
     public GameObject shooter;
+    public ObjectPool bulletPool;
 
     private CharacterController controller;
     private Vector3 playerVelocity;
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject bullet = ObjectPool.SharedInstance.GetPooledObject();
+            GameObject bullet = bulletPool.GetPooledObject();
             if (bullet != null)
             {
                 bullet.transform.position = shooter.transform.position;

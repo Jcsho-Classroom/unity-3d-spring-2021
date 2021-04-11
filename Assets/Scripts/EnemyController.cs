@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public Transform player;
-    public float detectionRadius = 5;
+    public float detectionDistance = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         Color c = Color.white;
-        if (Vector3.Distance(transform.position, player.position) < detectionRadius)
+        if (Vector3.Distance(transform.position, player.position) < detectionDistance)
         {
             c = Color.red;
         }
@@ -28,5 +28,18 @@ public class EnemyController : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawLine(transform.position, player.position);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        PlayerController player = other.gameObject.GetComponent<PlayerController>();
+        if (player != null)
+        {
+            Vector3 playerPosition = player.gameObject.transform.position;
+
+            // andrew - go closer to player, shoot once its close enough (player should die when it takes enough hits)
+            // jason - attack the player, rotate towards the player
+            // william - turn towards the player, start shooting
+        }
     }
 }
