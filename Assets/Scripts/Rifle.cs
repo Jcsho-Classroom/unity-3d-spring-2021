@@ -5,6 +5,8 @@ public class Rifle : MonoBehaviour, IShootable
 
   public ObjectPool bulletPool;
 
+  public GameObject shooter;
+
   void Start()
   {
 
