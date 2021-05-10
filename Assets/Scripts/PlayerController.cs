@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet;
     public GameObject shooter;
     public ObjectPool bulletPool;
+    public HealthScriptableObject health;
 
     private CharacterController controller;
     private Vector3 playerVelocity;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("Health: " + health.currentHealth);
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {

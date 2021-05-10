@@ -896,6 +896,7 @@ MonoBehaviour:
   bullet: {fileID: 8907090334765066776, guid: 8a36a638e2072bb4796702c943aeba2e, type: 3}
   shooter: {fileID: 1081418672}
   bulletPool: {fileID: 1444685040}
+  health: {fileID: 11400000, guid: 1c109375f7c91ae4eaa075b408596b0f, type: 2}
 --- !u!1 &1625395817
 GameObject:
   m_ObjectHideFlags: 0
